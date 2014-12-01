@@ -69,15 +69,15 @@ bundle install
 ## Version History
 
 * v0.1.0 2014-12-01
-  * Initial release 
+  * Initial release
 
 ## Contributing
 
-Bring on the Pull Requests!
+Open an [Issue](https://github.com/ryanburnette/compose_url/issues) or bring a [Rull Request](https://github.com/ryanburnette/compose_url/pulls)!
 
 ## License
 
-Apache2
+[Apache2](https://github.com/ryanburnette/compose_url/blob/master/LICENSE)
 
 [1]: http://stackoverflow.com/questions/27234822/what-constitutes-a-valid-uri-query-parameter-key
 [2]: http://tools.ietf.org/html/rfc3986#section-4.2
