@@ -4,14 +4,20 @@
 
 ## Usage
 
-Instantiate `compose_url` by passing a `base_url`, optionally with some `params`.
+Instantiate `compose_url` by passing a `base_url`.
 
 ```ruby
 url = ComposeURL.new('http://api.com/1/a')
 ```
 
+Include some initial query parameters either in the initial `base_url` or as a Hash
+
 ```ruby
 url = ComposeURL.new('http://api.com/1/a', { 'foo' => 'bar', 'baz' => 'grault' })
+```
+
+```ruby
+url = ComposeURL.new('http://api.com/1/a?foo=bar&baz=grault')
 ```
 
 Add additional params to the resulting `ComposeURL` object.
@@ -67,6 +73,9 @@ bundle install
 * Self-contained testing
 
 ## Version History
+
+* v0.1.1 2014-12-01
+  * Parse out params in the initial `base_url` and add them to the `@params` hash
 
 * v0.1.0 2014-12-01
   * Initial release

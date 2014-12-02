@@ -4,9 +4,9 @@ require 'uri'
 class ComposeURL
   attr_accessor :params
 
-  def initialize(baseurl, params={})
-    @url = baseurl
-    @params = params
+  def initialize(base_url, params={})
+    @url = init_url(base_url)
+    @params = init_params(base_url).merge(params)
   end
 
   def add_param(k, v)
@@ -27,15 +27,16 @@ class ComposeURL
 
   private
 
-  # todo: is this a valid key?
-  def validate_key(k)
-    raise ComposeURLError.new('Invalid key') unless k == escape(k) # key shouldn't require escaping, or should it?
-    escape(k)
+  def init_url(base_url)
+    base_url[/[^?]+/]
   end
 
-  # todo: is this a valid value?
-  def validate_value(v)
-    escape(v)
+  def init_params(base_url)
+    base_url.gsub(init_url(base_url), '').gsub('?', '').split('&').inject({}) {|h, pair|
+      pair = pair.split('=')
+      h[pair[0]] = pair[1]
+      ; h
+    }
   end
 
   def validate_url(url)
@@ -45,7 +46,7 @@ class ComposeURL
 
   def params_string
     @params.map { |k,v|
-      "#{validate_key(k)}=#{validate_value(v)}"
+      "#{escape(k)}=#{escape(v)}"
     }.join('&')
   end
 

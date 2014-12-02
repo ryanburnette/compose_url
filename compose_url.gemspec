@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'compose_url'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.date        = '2014-12-01'
   s.summary     = "Helps you compose a URL."
   s.description = "A Ruby class that helps you compose a URL string with query parameters without all the fuss."
