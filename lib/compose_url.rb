@@ -1,5 +1,6 @@
 require 'cgi'
 require 'uri'
+require "addressable/uri"
 
 class ComposeURL
   attr_accessor :params
@@ -7,6 +8,7 @@ class ComposeURL
   def initialize(base_url, params={})
     @url = init_url(base_url)
     @params = init_params(base_url).merge(params)
+    url
   end
 
   def add_param(k, v)
@@ -32,11 +34,8 @@ class ComposeURL
   end
 
   def init_params(base_url)
-    base_url.gsub(init_url(base_url), '').gsub('?', '').split('&').inject({}) {|h, pair|
-      pair = pair.split('=')
-      h[pair[0]] = pair[1]
-      ; h
-    }
+    query_string = base_url.gsub(init_url(base_url), '')
+    query_string != '' ? CGI.parse(URI.parse(query_string).query) : {}
   end
 
   def validate_url(url)
@@ -45,9 +44,9 @@ class ComposeURL
   end
 
   def params_string
-    @params.map { |k,v|
-      "#{escape(k)}=#{escape(v)}"
-    }.join('&')
+    uri = Addressable::URI.new
+    uri.query_values = @params
+    uri.query
   end
 
   def escape(s)
