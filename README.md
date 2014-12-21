@@ -1,6 +1,7 @@
 # compose_url
 
-**compose_url** is a Ruby class that helps you compose a URL string without all the fuss.
+**compose_url** is a Ruby class that abstracts away the details composing a URL
+with query paramters.
 
 ## Usage
 
@@ -76,7 +77,10 @@ bundle install
 * Improve custom error class
 * Self-contained testing
 
-## Version History
+## History
+
+* v0.1.3 2014-12-20
+  * Define dependencies in Gemspec
 
 * v0.1.2 2014-12-02
   * Fix bug where params could be escaped twice
